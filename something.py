@@ -3,6 +3,7 @@ import sys
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QSpinBox, QLineEdit
 from PyQt5.QtGui import *
+from PyQt5.QtCore import QSize
 
 def create_label(window, text, font, width, height, x, y):
     lbl = QLabel(window)
@@ -43,18 +44,19 @@ def create_inputbox(window, placeholder_text, font, width, height, x, y):
     return ipb
 
 def ee(self):
-    pass 
+    print("Нажато") 
 
 def main():
     global win, health
     health = 100
     app = QApplication(sys.argv) 
     win = QMainWindow()           
-    win.setGeometry(600, 400, 700, 450) 
+    win.setGeometry(500, 300, 800, 550) 
     win.setWindowTitle("Что-то") 
-    health_label = create_label(win, f"Здоровье: {health}/100", QFont('Arial', 14), 200, 30, 100, 100)
-    but = create_button(win, "Кнопка", QFont('Arial', 14), 100, 100, 200, 200, ee)
-    but.setIcon(QIcon('image.jpg'))
+    health_label = create_label(win, f"Здоровье: {health}/100", QFont('Arial', 16), 300, 40, 0, 500)
+    but = create_button(win, "", QFont('Arial', 14), 100, 100, 0, 400, ee)
+    but.setIcon(QIcon('Image.png'))
+    but.setIconSize(QSize(100, 100))
     win.show()        
     sys.exit(app.exec_()) 
 
