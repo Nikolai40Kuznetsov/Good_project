@@ -4,6 +4,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QSpinBox, QLineEdit
 from PyQt5.QtGui import *
 from PyQt5.QtCore import QSize
+import servants_list as s_l
 
 def create_label(window, text, font, width, height, x, y):
     lbl = QLabel(window)
@@ -45,6 +46,9 @@ def create_inputbox(window, placeholder_text, font, width, height, x, y):
 
 def ee(self):
     print("Нажато") 
+
+a = s_l.summon()
+print(a.health)
 
 def main():
     global win, health

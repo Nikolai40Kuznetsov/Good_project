@@ -22,4 +22,4 @@ def summon():
     if servant == 1:
         return Servant("Артурия Пендрагон", "A", "A", "B", "B+", "C", "EX")
     if servant == 2:
-        return Servant("NN", "E-", "E-", "E-", "E-", "E-", )
+        return Servant("NN", "E-", "E-", "E-", "E-", "E-", "E-")
