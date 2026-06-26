@@ -44,25 +44,34 @@ def create_inputbox(window, placeholder_text, font, width, height, x, y):
     ipb.show()
     return ipb
 
-def ee(self):
-    print("Нажато") 
+def attack(self):
+    global mana, mana_label
+    mana -= your_servant.mana_consumption
+    if mana % 1 == 0:
+        mana = int(mana)
+    mana_label.hide()
+    mana_label = create_label(win, f"Мана:{mana}/1000", QFont('Arial', 16), 175, 40, 300, 500)
 
-a = s_l.summon()
-print(a.health)
+     
+
+your_servant = s_l.summon()
+print(your_servant.damage)
 
 def main():
-    global win, health
-    health = 100
+    global win, health, mana, mana_label
+    current_health = your_servant.health
+    mana = 1000
     app = QApplication(sys.argv) 
     win = QMainWindow()           
     win.setGeometry(500, 300, 800, 550) 
     win.setWindowTitle("Что-то") 
-    health_label = create_label(win, f"Здоровье: {health}/100", QFont('Arial', 16), 300, 40, 0, 500)
-    but = create_button(win, "", QFont('Arial', 14), 100, 100, 0, 400, ee)
-    but.setIcon(QIcon('Image.png'))
+    health_label = create_label(win, f"Здоровье слуги: {current_health}/{your_servant.health}", QFont('Arial', 16), 300, 40, 0, 500)
+    mana_label = create_label(win, f"Мана:{mana}/1000", QFont('Arial', 16), 175, 40, 300, 500)
+    but = create_button(win, "", QFont('Arial', 14), 100, 100, 0, 400, attack)
+    but.setIcon(QIcon('Attack.png'))
     but.setIconSize(QSize(100, 100))
     win.show()        
     sys.exit(app.exec_()) 
 
 # if __name__ == "__main__":
-#     main()             
+#   main()             
