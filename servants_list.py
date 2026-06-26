@@ -3,7 +3,8 @@ ranks = ["-", "E-", "E", "E+", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+"
 rank_to_value = {rank: i-1 for i, rank in enumerate(ranks)}
 
 class Servant():
-    def __init__(self, name, strength, endurance, agility, mana, luck, np, class_skill_1, class_skill_1_rank, class_skill_2, class_skill_2_rank):
+    def __init__(self, uid, name, strength, endurance, agility, mana, luck, np, class_skill_1, class_skill_1_rank, class_skill_2, class_skill_2_rank):
+        self.uid = uid
         self.name = name
         self.strength = self.convert_rank_to_value(strength)
         self.endurance = self.convert_rank_to_value(endurance)
@@ -18,12 +19,13 @@ class Servant():
         self.health = self.endurance * 250 + 1000
         self.damage = self.strength * 25 + 100
         self.magical_resistance = self.mag_res()
-        print(self.magical_resistance)
         self.mana_consumption = 20 * (1 - self.mana_cons() / 100)
-        print(self.mana_consumption)
 
     def convert_rank_to_value(self, rank):
         return rank_to_value.get(rank)
+    
+    def convert_back(self, value):
+        return ranks[value + 1]
     
     def mag_res(self):
         if self.class_skill_1 == "Сопротивление магии":
@@ -47,8 +49,8 @@ class Servant():
 def summon():
     servant = ran.randint(1, 3)
     if servant == 1:
-        return Servant("Артурия Пендрагон", "A", "B", "B", "A", "A+", "A++", "Сопротивление магии", "A", "Верховая езда", "B")
+        return Servant(1, "Артурия Пендрагон", "A", "B", "B", "A", "A+", "A++", "Сопротивление магии", "A", "Верховая езда", "B")
     if servant == 2:
-        return Servant("Гильгамеш", "B", "B", "B", "A", "A", "EX", "Сопротивление магии", "C", "Независимое действие", "A")
+        return Servant(2, "Гильгамеш", "B", "B", "B", "A", "A", "EX", "Сопротивление магии", "C", "Независимое действие", "A")
     if servant == 3:
-        return Servant("NN", "E-", "E-", "E-", "E-", "E-", "E-", " ", " ", " ", "")
+        return Servant(666, "NN", "E-", "E-", "E-", "E-", "E-", "E-", " ", " ", " ", "")

@@ -1,10 +1,12 @@
 import random as ran
 import sys
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QSpinBox, QLineEdit
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QSpinBox, QLineEdit, QDialog
 from PyQt5.QtGui import *
 from PyQt5.QtCore import QSize
 import servants_list as s_l
+
+your_servant = s_l.summon()
 
 def create_label(window, text, font, width, height, x, y):
     lbl = QLabel(window)
@@ -52,13 +54,25 @@ def attack(self):
     mana_label.hide()
     mana_label = create_label(win, f"Мана:{mana}/1000", QFont('Arial', 16), 175, 40, 300, 500)
 
-     
-
-your_servant = s_l.summon()
-print(your_servant.damage)
+def a(self):
+    global win
+    new_win = QDialog(win)
+    new_win.setWindowTitle("Параметры слуги")
+    new_win.resize(300, 550)
+    new_win.move(1300, 270)
+    label = create_label(new_win, f"Имя: {your_servant.name}", QFont('Arial', 16), 200, 40, 0, 0)
+    label = create_label(new_win, f"Сила: {your_servant.convert_back(your_servant.strength)}", QFont('Arial', 16), 200, 80, 0, 0)
+    label = create_label(new_win, "Текст", QFont('Arial', 16), 200, 120, 0, 0)
+    label = create_label(new_win, "Текст", QFont('Arial', 16), 200, 160, 0, 0)
+    label = create_label(new_win, "Текст", QFont('Arial', 16), 200, 200, 0, 0)
+    label = create_label(new_win, "Текст", QFont('Arial', 16), 200, 240, 0, 0)
+    label = create_label(new_win, "Текст", QFont('Arial', 16), 200, 280, 0, 0)
+    label = create_label(new_win, "Текст", QFont('Arial', 16), 200, 320, 0, 0)
+    label = create_label(new_win, "Текст", QFont('Arial', 16), 200, 360, 0, 0)
+    new_win.show()
 
 def main():
-    global win, health, mana, mana_label
+    global app, win, health, mana, mana_label
     current_health = your_servant.health
     mana = 1000
     app = QApplication(sys.argv) 
@@ -67,11 +81,12 @@ def main():
     win.setWindowTitle("Что-то") 
     health_label = create_label(win, f"Здоровье слуги: {current_health}/{your_servant.health}", QFont('Arial', 16), 300, 40, 0, 500)
     mana_label = create_label(win, f"Мана:{mana}/1000", QFont('Arial', 16), 175, 40, 300, 500)
+    stats_button = create_button(win, "Характеристики слуги", QFont('Arial', 16), 250, 40, 475, 500, a)
     but = create_button(win, "", QFont('Arial', 14), 100, 100, 0, 400, attack)
     but.setIcon(QIcon('Attack.png'))
     but.setIconSize(QSize(100, 100))
     win.show()        
     sys.exit(app.exec_()) 
 
-# if __name__ == "__main__":
-#   main()             
+if __name__ == "__main__":
+    main()             
